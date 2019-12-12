@@ -146,8 +146,6 @@ class PaymentAcquirerFlow(models.Model):
         #post['uf'] += '/%s' % str(self.id)
         client = self.flow_get_client()
         res = client.payments.post(post)
-        logging.info(post)
-        logging.info('POOOOOST')
         if hasattr(res, 'payment_url'):
             tx.write({'state': 'pending'})
         return res
