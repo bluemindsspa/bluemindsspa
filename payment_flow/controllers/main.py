@@ -48,6 +48,10 @@ class FlowController(http.Controller):
         tx_data = payment_tx.acquirer_id.flow_getTransaction(post)
         tx_data._token = post['token']
         payment_tx.sudo().form_feedback(tx_data, 'flow')
+        logging.info('anteeees')
+        logging.info(payment_tx)
+        logging.info(tx_data)
+        logging.info(post)
         return werkzeug.utils.redirect('/shop/confirmation')
 
     @http.route([
@@ -55,11 +59,15 @@ class FlowController(http.Controller):
         '/payment/flow/test/final',
     ], type='http', auth='none', csrf=False, website=True)
     def final(self, **post):
+        logging.info('POST RETURN')
+        logging.info(post)
         return werkzeug.utils.redirect('/shop/confirmation')
 
     @http.route(['/payment/flow/redirect'],  type='http', auth='public', methods=["POST"], csrf=False, website=True)
     def redirect_flow(self, **post):
         acquirer_id = int(post.get('acquirer_id'))
+        logging.info('redireeect')
+        logging.info(posts)
         acquirer = request.env['payment.acquirer'].browse(acquirer_id)
         result = acquirer.flow_initTransaction(post)
         if result.token:
