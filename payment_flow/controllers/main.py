@@ -51,7 +51,7 @@ class FlowController(http.Controller):
         logging.info('anteeees')
         payment= payment_tx.reference[0:7]
         sale = request.env['sale.order'].search([('name', '=', payment)])
-        sale.invoice_status = 'to_invoice'
+        sale.invoice_status = 'to invoice'
         sale.write({'invoice_status':'to invoice'})
         
         return werkzeug.utils.redirect('/shop/confirmation')
