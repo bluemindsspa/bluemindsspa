@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import requests
 import json
+from odoo import api, models, fields
 import dateutil.parser
 from .errors import ValidationError, AuthorizationError, ServiceError
 import logging
@@ -83,7 +84,7 @@ class PaymentsResponse(BaseResponse):
         self._message = message
 
     @classmethod
-    def from_data(cls, data):
+    def from_data(self,cls, data):
         payment_data = data.get('paymentData', {})
         if payment_data:
             payment_method = medios_pago[payment_data['media']]
