@@ -89,7 +89,7 @@ class PaymentsResponse(BaseResponse):
         payment_data = data.get('paymentData', {})
         logging.info(payment_data)
         logging.info('payment dataaaaaaaaaaaaaaaa')
-        if payment_data['data']:
+        if payment_data['media']:
             payment_method = medios_pago[payment_data['media']]
 
         conciliation_date = dateutil.parser.parse(payment_data.get('date'))
