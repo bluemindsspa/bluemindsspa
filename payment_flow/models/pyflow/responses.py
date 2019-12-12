@@ -84,15 +84,16 @@ class PaymentsResponse(BaseResponse):
 
     @classmethod
     def from_data(cls, data):
-        logging.info('dataaaaaaaaaaa')
-        logging.info(data)
         payment_data = data.get('paymentData', {})
         if payment_data:
             payment_method = medios_pago[payment_data['media']]
 
         conciliation_date = dateutil.parser.parse(payment_data.get('date'))
         expires_date = False #dateutil.parser.parse(data.get('expires_date'))
-
+        num= data.get('commerceOrder')[0:6]
+        sale = self.env['sale.order'].search([('name', '=', num)])
+        logging.info(sale.name)
+        logging.info('SALEEEEEEEEEEEEE')
         return cls(data.get('flowOrder'), data.get('url'),
             data.get('simplified_transfer_url'), data.get('transfer_url'),
             data.get('app_url'), data.get('ready_for_terminal'),

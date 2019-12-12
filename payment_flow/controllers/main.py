@@ -33,8 +33,6 @@ class FlowController(http.Controller):
     def flow_validate_data(self, acquirer_id=None, **post):
         acquirer = request.env['payment.acquirer'].browse(acquirer_id)
         tx_data = acquirer.flow_getTransaction(post)
-        logging.info('validaaaaaaaar')
-        logging.info(post)
         res = request.env['payment.transaction'].sudo().form_feedback(tx_data, 'flow')
         return ''
         return Response(status=200)
@@ -51,9 +49,10 @@ class FlowController(http.Controller):
         tx_data._token = post['token']
         payment_tx.sudo().form_feedback(tx_data, 'flow')
         logging.info('anteeees')
-        logging.info(payment_tx)
-        logging.info(tx_data)
-        logging.info(self)
+        payment= payment_tx.reference[0:6]
+        sale = self.env['sale.order'].search([('name', '=', payment)])
+        logging.info(sale.name)
+        logging.info('SALEEEEEEEEEEEEE2222222222')
         return werkzeug.utils.redirect('/shop/confirmation')
 
     @http.route([
