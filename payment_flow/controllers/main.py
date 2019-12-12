@@ -50,9 +50,10 @@ class FlowController(http.Controller):
         payment_tx.sudo().form_feedback(tx_data, 'flow')
         logging.info('anteeees')
         payment= payment_tx.reference[0:7]
-        sale = request.env['sale.order'].search([('name', '=', payment)])
-        logging.info(sale.name)
-        logging.info('SALEEEEEEEEEEEEE2222222222')
+        sale = request.env['sale.order'].search([('name', '=', payment)]).id
+
+        sale.write({'invoice_status':'to invoice'})
+        
         return werkzeug.utils.redirect('/shop/confirmation')
 
     @http.route([
