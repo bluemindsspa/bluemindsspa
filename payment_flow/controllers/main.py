@@ -50,7 +50,7 @@ class FlowController(http.Controller):
         payment_tx.sudo().form_feedback(tx_data, 'flow')
         logging.info('anteeees')
         payment= payment_tx.reference[0:7]
-        sale = request.env['sale.order'].search([('name', '=', payment)]).id
+        sale = request.env['sale.order'].search([('name', '=', payment)])
 
         sale.write({'invoice_status':'to invoice'})
         
