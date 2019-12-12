@@ -163,6 +163,9 @@ class Client(object):
     * @return string el estado de la Orden del comercio
     '''
     def getStatus():
+        logging.info('statuuuus')
+        logging.info(self.order)
+        logging.info(self.order["Status"])
         return self.order["Status"]
 
 
