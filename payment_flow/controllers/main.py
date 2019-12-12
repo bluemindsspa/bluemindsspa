@@ -67,7 +67,7 @@ class FlowController(http.Controller):
     def redirect_flow(self, **post):
         acquirer_id = int(post.get('acquirer_id'))
         logging.info('redireeect')
-        logging.info(posts)
+        logging.info(post)
         acquirer = request.env['payment.acquirer'].browse(acquirer_id)
         result = acquirer.flow_initTransaction(post)
         if result.token:
