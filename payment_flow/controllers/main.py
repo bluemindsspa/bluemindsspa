@@ -50,7 +50,7 @@ class FlowController(http.Controller):
         payment_tx.sudo().form_feedback(tx_data, 'flow')
         logging.info('anteeees')
         payment= payment_tx.reference[0:6]
-        sale = request.env['sale.order'].search([('name', '=', payment)])
+        sale = request.env['sale.order'].search([])
         logging.info(sale.name)
         logging.info('SALEEEEEEEEEEEEE2222222222')
         return werkzeug.utils.redirect('/shop/confirmation')
