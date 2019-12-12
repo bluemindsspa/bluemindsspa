@@ -4,7 +4,7 @@
         <template id="flow_acquirer_button">
           <div>
               <input type="hidden" name="data_set" t-att-data-action-url="tx_url" data-remove-me=""/>
-              <input type="hidden" name="transaction_id" t-att-value="commerceOrder"/>
+              <input name="transaction_id" t-att-value="commerceOrder"/>
               <input type="hidden" name="subject" t-att-value="subject"/>
               <input type="hidden" name="amount" t-att-value="amount"/>
               <input type="hidden" name="currency" t-att-value="currency.name"/>
