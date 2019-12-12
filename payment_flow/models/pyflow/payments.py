@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 from .responses import PaymentsResponse, PaymentsCreateResponse
+import logging
 
 
 class Payments(object):
@@ -37,6 +38,9 @@ class Payments(object):
         """
         endpoint = "{0}/{1}/".format(self.ENDPOINT, id)
         response = self.client.make_request('GET', endpoint)
+        logging.info('endpoint')
+        logging.info(response)
+
         return PaymentsResponse.from_response(response)
 
     def delete(self, id):

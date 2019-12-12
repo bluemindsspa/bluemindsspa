@@ -20,6 +20,8 @@ class BaseResponse(object):
     @classmethod
     def from_response(cls, response):
         data = json.loads(response.data.decode())
+        logging.info(data)
+        logging.info('data')
         _logger.info("res %s" %data)
         if data.get('token') or data.get('flowOrder'):
             return cls.from_data(data)
