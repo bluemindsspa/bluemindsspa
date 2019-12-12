@@ -20,8 +20,6 @@ class BaseResponse(object):
     @classmethod
     def from_response(cls, response):
         data = json.loads(response.data.decode())
-        logging.info(data)
-        logging.info('data')
         _logger.info("res %s" %data)
         if data.get('token') or data.get('flowOrder'):
             return cls.from_data(data)
@@ -87,35 +85,32 @@ class PaymentsResponse(BaseResponse):
     @classmethod
     def from_data(cls, data):
         payment_data = data.get('paymentData', {})
-        logging.info(payment_data)
-        logging.info('payment dataaaaaaaaaaaaaaaa')
-        if payment_data['media']:
+        if payment_data:
             payment_method = medios_pago[payment_data['media']]
 
-            conciliation_date = dateutil.parser.parse(payment_data.get('date'))
-            expires_date = False #dateutil.parser.parse(data.get('expires_date'))
+        conciliation_date = dateutil.parser.parse(payment_data.get('date'))
+        expires_date = False #dateutil.parser.parse(data.get('expires_date'))
 
-            return cls(data.get('flowOrder'), data.get('url'),
-                data.get('simplified_transfer_url'), data.get('transfer_url'),
-                data.get('app_url'), data.get('ready_for_terminal'),
-                data.get('token'), data.get('receiver_id'),
-                conciliation_date, data.get('subject'),
-                data.get('amount'), data.get('currency'), data.get('status'),
-                data.get('paymentData'), data.get('body'),
-                data.get('picture_url'), data.get('receipt_url'),
-                data.get('return_url'), data.get('cancel_url'),
-                data.get('notify_url'), data.get('notify_api_version'),
-                expires_date, data.get('attachment_urls'),
-                data.get('bank'), data.get('bank_id'), data.get('payer_name'),
-                data.get('email') or data.get('payer'), data.get('personal_identifier'),
-                data.get('bank_account_number'),
-                data.get('out_of_date_conciliation'), data.get('commerceOrder'),
-                data.get('custom'), data.get('responsible_user_email'),
-                data.get('send_reminders'), data.get('send_email'),
-                data.get('paymentMethod', payment_method),
-                data.get('code'),data.get('message'))
-        else:
-            return('Error')
+        return cls(data.get('flowOrder'), data.get('url'),
+            data.get('simplified_transfer_url'), data.get('transfer_url'),
+            data.get('app_url'), data.get('ready_for_terminal'),
+            data.get('token'), data.get('receiver_id'),
+            conciliation_date, data.get('subject'),
+            data.get('amount'), data.get('currency'), data.get('status'),
+            data.get('paymentData'), data.get('body'),
+            data.get('picture_url'), data.get('receipt_url'),
+            data.get('return_url'), data.get('cancel_url'),
+            data.get('notify_url'), data.get('notify_api_version'),
+            expires_date, data.get('attachment_urls'),
+            data.get('bank'), data.get('bank_id'), data.get('payer_name'),
+            data.get('email') or data.get('payer'), data.get('personal_identifier'),
+            data.get('bank_account_number'),
+            data.get('out_of_date_conciliation'), data.get('commerceOrder'),
+            data.get('custom'), data.get('responsible_user_email'),
+            data.get('send_reminders'), data.get('send_email'),
+            data.get('paymentMethod', payment_method),
+            data.get('code'),data.get('message'))
+
     @property
     def payment_id(self):
         """
