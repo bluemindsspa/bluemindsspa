@@ -89,8 +89,6 @@ class PaymentAcquirerFlow(models.Model):
     def flow_form_generate_values(self, values):
         #banks = self.flow_get_banks()#@TODO mostrar listados de bancos
         #_logger.warning("banks %s" %banks)
-        logging.info('VALUUUES')
-        logging.info(values)
         values.update({
             'acquirer_id': self.id,
             'commerceOrder': values['reference'],
@@ -208,9 +206,8 @@ class PaymentTxFlow(models.Model):
         if status in [2]:
             _logger.info('Validated flow payment for tx %s: set as done' % (self.reference))
             res.update(state='done', date=datetime.now())
-            logging.info('REEEEEEEES')
-            logging.info(res)
             return self.write(res)
+            
         elif status in [1, '-7']:
             _logger.warning('Received notification for flow payment %s: set as pending' % (self.reference))
             res.update(state='pending', state_message=data.get('pending_reason', ''))

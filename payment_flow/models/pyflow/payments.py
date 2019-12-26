@@ -38,8 +38,6 @@ class Payments(object):
         """
         endpoint = "{0}/{1}/".format(self.ENDPOINT, id)
         response = self.client.make_request('GET', endpoint)
-        logging.info('endpoint')
-        logging.info(response)
 
         return PaymentsResponse.from_response(response)
 
