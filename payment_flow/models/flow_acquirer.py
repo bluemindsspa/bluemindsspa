@@ -91,11 +91,12 @@ class PaymentAcquirerFlow(models.Model):
         #_logger.warning("banks %s" %banks)
         logging.info('VALUUUUUUUUUUUUUES')
         number = self.env['ir.sequence'].search([('code', '=', 'sale.order')]).number_next_actual
+        code = self.env['ir.sequence'].search([('code', '=', 'sale.order')]).prefix
         logging.info(number)
         logging.info(values)
         values.update({
             'acquirer_id': self.id,
-            'commerceOrder':number,
+            'commerceOrder':str(code) + '00'+str(number),
             'subject': '%s: %s' % (self.company_id.name, values['reference']),
             'amount': values['amount'],
             'email': values['partner_email'],
