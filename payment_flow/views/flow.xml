@@ -25,9 +25,23 @@
           <t t-raw="flow_redirect" />
         </template>
 
-        <template id="error" name="error">
-          <t t-raw="error" />
-        </template>
+        <template id="error">
+		<t t-call="website.layout">
+			<div id="wrap">
+				<div class="oe_structure oe_empty">
+					<div class="container">
+						<h1 class="mt32">
+							<span t-esc="message['header']" />
+						</h1>
+						<div t-raw="message['detail']" />
+						<p>
+							<a t-attf-href="/shop">Volver al listado de productos.</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</t>
+	</template>
 
     </data>
 </odoo>
