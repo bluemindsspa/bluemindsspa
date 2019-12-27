@@ -46,9 +46,7 @@ class FlowController(http.Controller):
         if not payment_tx:
             return
         tx_data = payment_tx.acquirer_id.flow_getTransaction(post)
-        logging.info('dataaaaaaaaaaaaaaaaaaaaaaaa')
-        logging.info(tx_data)
-        if tx_data._token:
+        if tx_data:
             tx_data._token = post['token']
             payment_tx.sudo().form_feedback(tx_data, 'flow')
             #coloque estas líneas para colocar el status del pedido A facturar y a Pedido de Venta
