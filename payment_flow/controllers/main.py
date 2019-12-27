@@ -48,11 +48,13 @@ class FlowController(http.Controller):
         tx_data = payment_tx.acquirer_id.flow_getTransaction(post)
         tx_data._token = post['token']
         payment_tx.sudo().form_feedback(tx_data, 'flow')
-        #coloque estas líneas para colocar el status del pedido A facturar
+        #coloque estas líneas para colocar el status del pedido A facturar y a Pedido de Venta
         payment= payment_tx.reference[0:7]
         sale = request.env['sale.order'].search([('name', '=', payment)])
         sale.invoice_status = 'to invoice'
         sale.write({'invoice_status':'to invoice'})
+        sale.state = 'sale'
+        sale.write({'state':'sale'})
         
         return werkzeug.utils.redirect('/shop/confirmation')
 

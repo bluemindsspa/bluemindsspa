@@ -8,7 +8,7 @@
               <input type="hidden" name="subject" t-att-value="subject"/>
               <input type="hidden" name="amount" t-att-value="amount"/>
               <input type="hidden" name="currency" t-att-value="currency.name"/>
-              <input  name="commerceOrder" t-att-value="commerceOrder"/>
+              <input type="hidden" name="commerceOrder" t-att-value="commerceOrder"/>
               <input t-if="fees" type="hidden" name="fees"
                   t-att-value="fees"/>
               <!-- partner / address data -->

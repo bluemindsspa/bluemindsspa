@@ -172,8 +172,6 @@ class Client(object):
     * @return string el número de la Orden de Flow
     '''
     def getFlowNumber():
-        logging.info(self.order["FlowNumero"])
-        logging.info('NUMEROOOOOOOOOOOOOOOOOO')
         return self.order["FlowNumero"]
 
 
@@ -211,8 +209,6 @@ class Client(object):
             raise UserError("El monto de la orden debe ser numérico")
         if monto < 350:
             raise 'El Monto Mínimo es de $350'
-        logging.info('ORRRRRRRRRRDEEEEEEN')
-        logging.info(orden_compra)
         self.order["OrdenNumero"] = orden_compra
         self.order["Concepto"] = concepto
         self.order["Monto"] = monto
