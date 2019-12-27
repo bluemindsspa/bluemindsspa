@@ -89,14 +89,9 @@ class PaymentAcquirerFlow(models.Model):
     def flow_form_generate_values(self, values):
         #banks = self.flow_get_banks()#@TODO mostrar listados de bancos
         #_logger.warning("banks %s" %banks)
-        logging.info('VALUUUUUUUUUUUUUES')
-        number = self.env['ir.sequence'].search([('code', '=', 'sale.order')]).number_next_actual
-        code = self.env['ir.sequence'].search([('code', '=', 'sale.order')]).prefix
-        logging.info(number)
-        logging.info(values)
         values.update({
             'acquirer_id': self.id,
-            'commerceOrder':str(code) + '00'+str(number),
+            'commerceOrder': values['reference'],
             'subject': '%s: %s' % (self.company_id.name, values['reference']),
             'amount': values['amount'],
             'email': values['partner_email'],
