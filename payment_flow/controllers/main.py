@@ -46,31 +46,17 @@ class FlowController(http.Controller):
         if not payment_tx:
             return
         tx_data = payment_tx.acquirer_id.flow_getTransaction(post)
-        logging.info(post)
-        logging.info('PPPPPPPPPPPPPPPPPPPPPPPPOST')
-        if not post['token']:
-            logging.info('CAAAAAAAAAAAAAAAA')
-            message = {
-                'header': 'Oops!. La transacción no se ha podido terminar.',
-                
-                'detail':
-                    '<p>Los posibles causas pueden ser:</p>'+
-                    '<ul><li>Error en el ingreso de los datos de su tarjeta de Crédito o Débito (fecha y/o código de seguridad).</li>'+
-                    '<li>Su tarjeta de Crédito o Débito no cuenta con saldo suficiente.</li>'+
-                    '<li>Tarjeta aún no habilitada en el sistema financiero</li>'
-            }
-        else:
-            tx_data._token = post['token']
-            payment_tx.sudo().form_feedback(tx_data, 'flow')
-            #coloque estas líneas para colocar el status del pedido A facturar y a Pedido de Venta
-            payment= payment_tx.reference[0:7]
-            sale = request.env['sale.order'].search([('name', '=', payment)])
-            sale.invoice_status = 'to invoice'
-            sale.write({'invoice_status':'to invoice'})
-            sale.state = 'sale'
-            sale.write({'state':'sale'})
-            
-            return werkzeug.utils.redirect('/shop/confirmation')
+        tx_data._token = post['token']
+        payment_tx.sudo().form_feedback(tx_data, 'flow')
+        #coloque estas líneas para colocar el status del pedido A facturar y a Pedido de Venta
+        payment= payment_tx.reference[0:7]
+        sale = request.env['sale.order'].search([('name', '=', payment)])
+        sale.invoice_status = 'to invoice'
+        sale.write({'invoice_status':'to invoice'})
+        sale.state = 'sale'
+        sale.write({'state':'sale'})
+        
+        return werkzeug.utils.redirect('/shop/confirmation')
 
     @http.route([
         '/payment/flow/final',
