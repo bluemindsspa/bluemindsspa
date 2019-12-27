@@ -84,7 +84,8 @@ class PaymentsResponse(BaseResponse):
 
     @classmethod
     def from_data(cls, data):
-       
+        logging.info('DATAAAAAAAAAAAAAAAAAAAA')
+        logging.info(data)
         payment_data = data.get('paymentData', {})
         if payment_data:
             payment_method = medios_pago[payment_data['media']]

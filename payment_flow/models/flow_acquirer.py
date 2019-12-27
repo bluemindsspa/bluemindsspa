@@ -89,6 +89,8 @@ class PaymentAcquirerFlow(models.Model):
     def flow_form_generate_values(self, values):
         #banks = self.flow_get_banks()#@TODO mostrar listados de bancos
         #_logger.warning("banks %s" %banks)
+        logging.info('VALUUUUUUUUUUUUUES')
+        logging.info(values)
         values.update({
             'acquirer_id': self.id,
             'commerceOrder': values['reference'],
