@@ -110,6 +110,7 @@ class PaymentsResponse(BaseResponse):
                 data.get('send_reminders'), data.get('send_email'),
                 data.get('paymentMethod', payment_method),
                 data.get('code'),data.get('message'))
+        """
         else:
             message = {
                 'header': 'Oops!. La transacción no se ha podido terminar.',
@@ -120,7 +121,7 @@ class PaymentsResponse(BaseResponse):
                     '<li>Su tarjeta de Crédito o Débito no cuenta con saldo suficiente.</li>'+
                     '<li>Tarjeta aún no habilitada en el sistema financiero</li>'
             }
-            
+        """    
             
     @property
     def payment_id(self):
