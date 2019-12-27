@@ -47,6 +47,7 @@ class FlowController(http.Controller):
             return
         tx_data = payment_tx.acquirer_id.flow_getTransaction(post)
         if not post['token']:
+            logging.info('CAAAAAAAAAAAAAAAA')
             message = {
                 'header': 'Oops!. La transacción no se ha podido terminar.',
                 
