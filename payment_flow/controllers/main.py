@@ -69,7 +69,7 @@ class FlowController(http.Controller):
                     '<li>Su tarjeta de Crédito o Débito no cuenta con saldo suficiente.</li>'+
                     '<li>Tarjeta aún no habilitada en el sistema financiero</li>'
             }
-            return request.render('payment_flow.error', { 'message': message })
+            return request.render('payment_flow.error', { 'message': message }) 
 
 
     @http.route([
