@@ -46,6 +46,7 @@ class FlowController(http.Controller):
         if not payment_tx:
             return
         tx_data = payment_tx.acquirer_id.flow_getTransaction(post)
+        logging.info(post)
         if not post['token']:
             logging.info('CAAAAAAAAAAAAAAAA')
             message = {
