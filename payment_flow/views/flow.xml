@@ -25,5 +25,9 @@
           <t t-raw="flow_redirect" />
         </template>
 
+        <template id="error" name="error">
+          <t t-raw="error" />
+        </template>
+
     </data>
 </odoo>
