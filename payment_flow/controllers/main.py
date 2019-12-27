@@ -46,6 +46,7 @@ class FlowController(http.Controller):
         if not payment_tx:
             return
         tx_data = payment_tx.acquirer_id.flow_getTransaction(post)
+        
         if tx_data:
             tx_data._token = post['token']
             payment_tx.sudo().form_feedback(tx_data, 'flow')
@@ -68,7 +69,7 @@ class FlowController(http.Controller):
                     '<li>Su tarjeta de Crédito o Débito no cuenta con saldo suficiente.</li>'+
                     '<li>Tarjeta aún no habilitada en el sistema financiero</li>'
             }
-            return request.render('payment_flow.error', { 'error': message })
+            return request.render('payment_flow.error', { 'message': message })
 
 
     @http.route([
