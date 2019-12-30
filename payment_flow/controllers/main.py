@@ -43,8 +43,7 @@ class FlowController(http.Controller):
     ], type='http', auth='public', csrf=False, website=True)
     def flow_form_feedback(self, payment_tx=None, **post):
         _logger.warning("post %s, pay %s" %(post, payment_tx))
-        logging.info(payment_tx)
-        logging.info('POOOOOOOOOOOOOOOOST')
+        
         if not payment_tx:
             return
         tx_data = payment_tx.acquirer_id.flow_getTransaction(post)
@@ -61,9 +60,10 @@ class FlowController(http.Controller):
             
             return werkzeug.utils.redirect('/shop/confirmation')
         else:
+            sale = payment_tx.reference[0:7]
             message = {
                 'header': 'Oops!. La transacción no se ha podido terminar.',
-                'body': 'Orden de compra ' + sale.name,
+                'body': 'Orden de compra ' + sale,
                 
                 'detail':
                     '<p>Los posibles causas pueden ser:</p>'+
