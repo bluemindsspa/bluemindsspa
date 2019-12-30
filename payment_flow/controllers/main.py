@@ -43,7 +43,7 @@ class FlowController(http.Controller):
     ], type='http', auth='public', csrf=False, website=True)
     def flow_form_feedback(self, payment_tx=None, **post):
         _logger.warning("post %s, pay %s" %(post, payment_tx))
-        logging.info(post)
+        logging.info(payment_tx)
         logging.info('POOOOOOOOOOOOOOOOST')
         if not payment_tx:
             return
