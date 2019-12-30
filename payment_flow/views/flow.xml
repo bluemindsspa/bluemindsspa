@@ -33,6 +33,7 @@
 						<h1 class="mt32">
 							<span t-esc="message['header']" />
 						</h1>
+                        <p t-esc="message['body']" />
 						<div t-raw="message['detail']" />
 						<p>
 							<a t-attf-href="/shop">Volver al listado de productos.</a>

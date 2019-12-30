@@ -46,13 +46,15 @@ class FlowController(http.Controller):
         if not payment_tx:
             return
         tx_data = payment_tx.acquirer_id.flow_getTransaction(post)
-        
+        logging.info(self.check_param(post))
+        logging.info('POOOOOOOOOOOOOOOOOOST')
         if tx_data:
             tx_data._token = post['token']
             payment_tx.sudo().form_feedback(tx_data, 'flow')
             #coloque estas líneas para colocar el status del pedido A facturar y a Pedido de Venta
             payment= payment_tx.reference[0:7]
             sale = request.env['sale.order'].search([('name', '=', payment)])
+
             sale.invoice_status = 'to invoice'
             sale.write({'invoice_status':'to invoice'})
             sale.state = 'sale'
@@ -62,6 +64,7 @@ class FlowController(http.Controller):
         else:
             message = {
                 'header': 'Oops!. La transacción no se ha podido terminar.',
+                'body': 'Orden de compra ' + sale.name,
                 
                 'detail':
                     '<p>Los posibles causas pueden ser:</p>'+
